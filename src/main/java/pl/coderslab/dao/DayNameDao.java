@@ -13,7 +13,7 @@ import java.util.List;
 public class DayNameDao {
 
     // Zapytania SQL
-    private static final String FIND_ALL_DAY_NAME_QUERY = "SELECT * FROM day_name";
+    private static final String FIND_ALL_DAY_NAME_QUERY = "SELECT * FROM day_name;";
 
     public List<DayName> findAll() {
         List<DayName> dayNamelist = new ArrayList<>();

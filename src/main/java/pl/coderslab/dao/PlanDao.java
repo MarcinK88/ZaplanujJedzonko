@@ -14,10 +14,10 @@ import java.util.List;
 public class PlanDao {
 
     private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,admin_id) VALUES (?,?,?,?);";
-    private static final String DELETE_PLAN_QUERY = "DELETE FROM plan WHERE id = ?";
-    private static final String FIND_ALL_PLAN_QUERY = "SELECT * FROM plan";
-    private static final String UPDATE_PLAN_QUERY = "UPDATE plan SET name = ? , description = ?, created = ?, admin_id = ? where id = ?";
-    private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?";
+    private static final String DELETE_PLAN_QUERY = "DELETE FROM plan WHERE id = ?;";
+    private static final String FIND_ALL_PLAN_QUERY = "SELECT * FROM plan;";
+    private static final String UPDATE_PLAN_QUERY = "UPDATE plan SET name = ? , description = ?, created = ?, admin_id = ? where id = ?;";
+    private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?;";
 
 
 

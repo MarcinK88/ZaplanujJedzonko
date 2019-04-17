@@ -19,6 +19,7 @@ public class AdminDao {
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins;";
     private static final String READ_ADMINS_QUERY = "SELECT * FROM admins WHERE id = ?;";
     private static final String UPDATE_ADMINS_QUERY = "UPDATE admins SET first_name = ? last_name = ?, email = ?, password = ?, superadmin = ?, enable = ? WHERE id = ?;";
+    private static final String READ_ADMIN_BY_EMAIL_QUERY = "SELECT * FROM admins WHERE email = ?;";
 
     public Admins read(Integer adminId) {
         Admins admins = new Admins();
@@ -133,6 +134,35 @@ public class AdminDao {
         }
 
     }
+    public Boolean checkPassword(String mail, String password) {
+        Boolean isCorrect = false;
+        Admins admins = new Admins();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_ADMIN_BY_EMAIL_QUERY)
+        ) {
 
+            statement.setString(1, mail);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+//                    admins.setPassword(BCrypt.hashpw(resultSet.getString("password"),BCrypt.gensalt()));
+                    admins.setPassword(resultSet.getString("password"));
+
+                }
+
+                if (BCrypt.checkpw(password, admins.getPassword())){
+                    //sout - w celach testów
+                    System.out.println("It matches");
+                    isCorrect = true;
+                } else {
+                    System.out.println("It does not match");
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isCorrect;
+
+    }
 
 }

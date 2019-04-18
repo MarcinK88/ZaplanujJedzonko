@@ -150,11 +150,8 @@ public class AdminDao {
                 }
 
                 if (BCrypt.checkpw(password, admins.getPassword())){
-                    //sout - w celach testów
-                    System.out.println("It matches");
+
                     isCorrect = true;
-                } else {
-                    System.out.println("It does not match");
                 }
 
             }

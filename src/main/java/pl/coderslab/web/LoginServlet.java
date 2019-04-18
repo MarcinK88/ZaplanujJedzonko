@@ -22,10 +22,10 @@ public class LoginServlet extends HttpServlet {
         Boolean isPasswordCorrect = credentials.checkPassword(req.getParameter("email"),req.getParameter("password"));
        // resp.getWriter().append(isPasswordCorrect.toString());
         if(isPasswordCorrect) {
-            resp.sendRedirect("/jee_scrumlab_war_exploded/");
+            resp.sendRedirect("/");
         } else {
 
-            resp.sendRedirect("/jee_scrumlab_war_exploded/login");
+            resp.sendRedirect("/login");
         }
     }
 }

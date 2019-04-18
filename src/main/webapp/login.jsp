@@ -45,7 +45,7 @@
     <div class="container pt-4 pb-4">
         <div class="border-dashed view-height">
             <div class="container w-25">
-                <form method="post" action="/jee_scrumlab_war_exploded/login" class="padding-small text-center">
+                <form method="post" action="/login" class="padding-small text-center">
                     <h1 class="text-color-darker">Logowanie</h1>
                     <div class="form-group">
                         <input type="text" class="form-control" id="email" name="email" placeholder="podaj adres email">

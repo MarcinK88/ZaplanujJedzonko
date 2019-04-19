@@ -17,7 +17,9 @@ public class RecipeDao {
     private static final String DELETE_RECIPE_QUERY = "DELETE FROM recipe WHERE ID = ?;";
     private static final String FIND_ALL_RECIPIES_QUERY = "SELECT * FROM recipe;";
     private static final String READ_RECIPE_QUERY = "SELECT * FROM recipe WHERE id = ?;";
+    private static final String READ_RECIPE_BY_ADMINID_QUERY = "SELECT * FROM recipe WHERE admin_id = ? ORDER BY updated ASC;";
     private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ?, ingredients = ?, description = ?, created = ?, updated = ?, preparation_time = ?, preparation = ?, admin_id = ? WHERE id = ?;";
+
 
     public Recipe read(Integer recipeId) {
         Recipe recipe = new Recipe();
@@ -42,6 +44,37 @@ public class RecipeDao {
             e.printStackTrace();
         }
         return recipe;
+    }
+
+    public List<Recipe> findAllByAdminId(Integer adminId) {
+
+        List<Recipe> recipeList = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_RECIPE_BY_ADMINID_QUERY);
+             ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Recipe recipeToAdd = new Recipe();
+                    recipeToAdd.setId(resultSet.getInt("id"));
+                    recipeToAdd.setName(resultSet.getString("name"));
+                    recipeToAdd.setIngredients(resultSet.getString("ingredients"));
+                    recipeToAdd.setDescription(resultSet.getString("description"));
+                    recipeToAdd.setCreated(resultSet.getString("created"));
+                    recipeToAdd.setUpdated(resultSet.getString("updated"));
+                    recipeToAdd.setPreparationTime(resultSet.getInt("preparation_time"));
+                    recipeToAdd.setPreparation(resultSet.getString("preparation"));
+                    recipeToAdd.setAdminId(resultSet.getInt("admin_id"));
+                    recipeList.add(recipeToAdd);
+                }
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipeList;
+
     }
 
     public List<Recipe> findAll() {

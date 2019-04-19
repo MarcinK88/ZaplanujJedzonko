@@ -47,23 +47,23 @@ public class RecipeDao {
     }
 
     public Integer recipeQuantity(Integer adminID) {
-        int q = 0;
+        int quantity = 0;
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_RECIPE_QUANTITY)) {
             statement.setInt(1, adminID);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    q = resultSet.getInt("counter");
+                    quantity = resultSet.getInt("counter");
                 }
 
             }
 
-            System.out.println(q);
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return q;
+        return quantity;
     }
 
     public List<Recipe> findAllByAdminId(Integer adminId) {

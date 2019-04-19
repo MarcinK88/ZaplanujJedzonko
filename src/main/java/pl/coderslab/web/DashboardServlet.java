@@ -1,5 +1,6 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
 import pl.coderslab.model.Admins;
 
@@ -16,9 +17,12 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RecipeDao recipeDao = new RecipeDao();
+        PlanDao planDao = new PlanDao();
         HttpSession httpSession = req.getSession();
         int recipeQuantity = recipeDao.recipeQuantity(((Admins) httpSession.getAttribute("loggedAdmin")).getId());
+        int planQuantity = planDao.planQuantity(((Admins) httpSession.getAttribute("loggedAdmin")).getId());
         httpSession.setAttribute("recipeQuantity", recipeQuantity);
+        httpSession.setAttribute("planQuantity", planQuantity);
         req.getServletContext().getRequestDispatcher("/dashboard.jsp").forward(req,resp);
     }
 

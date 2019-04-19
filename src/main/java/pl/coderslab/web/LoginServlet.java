@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/login")
@@ -22,7 +23,11 @@ public class LoginServlet extends HttpServlet {
         Boolean isPasswordCorrect = credentials.checkPassword(req.getParameter("email"),req.getParameter("password"));
        // resp.getWriter().append(isPasswordCorrect.toString());
         if(isPasswordCorrect) {
+            HttpSession session = req.getSession();
+            session.setAttribute("loggedUserMail", req.getParameter("email"));
             resp.sendRedirect("/");
+
+
         } else {
 
             resp.sendRedirect("/login");

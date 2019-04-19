@@ -46,6 +46,31 @@ public class AdminDao {
 
     }
 
+    public Admins readByEmail(String email) {
+        Admins admins = new Admins();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_ADMIN_BY_EMAIL_QUERY)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    admins.setId(resultSet.getInt("id"));
+                    admins.setFirstName(resultSet.getString("first_name"));
+                    admins.setLastName(resultSet.getString("last_name"));
+                    admins.setEmail(resultSet.getString("email"));
+//                    admins.setPassword(BCrypt.hashpw(resultSet.getString("password"),BCrypt.gensalt()));
+                    admins.setPassword(resultSet.getString("password"));
+                    admins.setSuperadmin(resultSet.getInt("superadmin"));
+                    admins.setEnable(resultSet.getInt("enable"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return admins;
+
+    }
+
     public List<Admins> findAll() {
         List<Admins> adminList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();

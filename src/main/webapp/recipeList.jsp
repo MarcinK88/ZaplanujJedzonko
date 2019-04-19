@@ -22,7 +22,7 @@
             Zaplanuj <span>Jedzonko</span>
         </a>
         <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">Imię</h4>
+            <h4 class="text-light mr-3">${loggedName}</h4>
             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
         </div>
     </nav>
@@ -86,9 +86,9 @@
                     </tr>
                     </thead>
                     <tbody class="text-color-lighter">
-                    <c:forEach items="${recipies}" var="recipe" >
+                    <c:forEach items="${recipies}" var="recipe" varStatus="loop">
                     <tr class="d-flex">
-                        <th scope="row" class="col-1">${recipe.id}</th>
+                        <th scope="row" class="col-1">${loop.count}</th>
                         <td class="col-2">
                             ${recipe.name}
                         </td>

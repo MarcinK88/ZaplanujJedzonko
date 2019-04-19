@@ -16,6 +16,7 @@
 </head>
 
 <body>
+
 <jsp:include page="WEB-INF/JSP/header.jsp"></jsp:include>
 
 <section class="padding-large bg-light">

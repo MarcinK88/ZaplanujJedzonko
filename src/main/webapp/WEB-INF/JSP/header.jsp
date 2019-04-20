@@ -5,7 +5,7 @@
         </a>
         <ul class="nav nounderline text-uppercase">
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="login.html">logowanie</a>
+                <a class="nav-link color-header" href="/login">logowanie</a>
             </li>
             <li class="nav-item ml-4">
                 <a class="nav-link color-header" href="/register">rejestracja</a>
@@ -14,7 +14,7 @@
                 <a class="nav-link" href="/about.jsp">o aplikacji</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="recipes.html">Przepisy</a>
+                <a class="nav-link disabled" href="/app/recipe/list/">Przepisy</a>
             </li>
             <li class="nav-item ml-4">
                 <a class="nav-link disabled" href="/contact.jsp">Kontakt</a>

@@ -1,6 +1,7 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.AdminDao;
+import pl.coderslab.model.Admins;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +22,12 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AdminDao credentials = new AdminDao();
         Boolean isPasswordCorrect = credentials.checkPassword(req.getParameter("email"),req.getParameter("password"));
-       // resp.getWriter().append(isPasswordCorrect.toString());
+
         if(isPasswordCorrect) {
             HttpSession session = req.getSession();
-            session.setAttribute("loggedUserMail", req.getParameter("email"));
+            AdminDao adminDao = new AdminDao();
+            Admins admin = adminDao.readByEmail(req.getParameter("email"));
+            session.setAttribute("loggedAdmin", admin);
             resp.sendRedirect("/");
 
 

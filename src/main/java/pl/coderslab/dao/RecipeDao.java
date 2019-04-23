@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RecipeDao {
 
-    private static final String CREATE_RECIPE_QUERY = "INSERT INTO recipe(name, ingredients, description, created, updated, preparation_time, preparation, admin_id VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String CREATE_RECIPE_QUERY = "INSERT INTO recipe(name, ingredients, description, created, updated, preparation_time, preparation, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String DELETE_RECIPE_QUERY = "DELETE FROM recipe WHERE ID = ?;";
     private static final String FIND_ALL_RECIPIES_QUERY = "SELECT * FROM recipe;";
     private static final String READ_RECIPE_QUERY = "SELECT * FROM recipe WHERE id = ?;";

@@ -3,6 +3,8 @@ package pl.coderslab.web;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
 import pl.coderslab.model.Admins;
+import pl.coderslab.model.Recipe;
+import pl.coderslab.model.RecipePlan;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
@@ -23,6 +27,15 @@ public class DashboardServlet extends HttpServlet {
         int planQuantity = planDao.planQuantity(((Admins) httpSession.getAttribute("loggedAdmin")).getId());
         httpSession.setAttribute("recipeQuantity", recipeQuantity);
         httpSession.setAttribute("planQuantity", planQuantity);
+
+        List<RecipePlan> recipePlanList = new ArrayList<>();
+        recipePlanList.addAll(planDao.findLastPlan(((Admins) (httpSession.getAttribute("loggedAdmin"))).getId()));
+        if (!recipePlanList.isEmpty()) {
+
+            httpSession.setAttribute("recipePlanList", recipePlanList);
+
+        }
+        httpSession.setAttribute("recipePlanName",planDao.getLastPlanName(((Admins) (httpSession.getAttribute("loggedAdmin"))).getId()));
         req.getServletContext().getRequestDispatcher("/dashboard.jsp").forward(req,resp);
     }
 

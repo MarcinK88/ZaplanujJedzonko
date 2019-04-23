@@ -105,60 +105,62 @@
             </div>
             <div class="m-4 p-4 border-dashed">
                 <h2 class="dashboard-content-title">
-                    <span>Ostatnio dodany plan:</span> Plan jak u mamy
+                    <span>Ostatnio dodany plan:</span> ${recipePlanName}
                 </h2>
+                <c:forEach items="${recipePlanList}" var="plan" >
                 <table class="table">
                     <thead>
                     <tr class="d-flex">
-                        <th class="col-2">Poniedziałek</th>
+                        <th class="col-2">${plan.dayName}</th>
                         <th class="col-8"></th>
                         <th class="col-2"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="d-flex">
-                        <td class="col-2">śniadanie</td>
-                        <td class="col-8">płatki owsiane z jagodami i komosą ryżową</td>
+                        <td class="col-2">${plan.mealName}</td>
+                        <td class="col-8">${plan.recipeName}</td>
                         <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
                     </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">śniadanie</td>
-                        <td class="col-8">kanapka z pastą rybną</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">obiad</td>
-                        <td class="col-8">zupa pomidorowa</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
+<%--                    <tr class="d-flex">--%>
+<%--                        <td class="col-2">śniadanie</td>--%>
+<%--                        <td class="col-8">kanapka z pastą rybną</td>--%>
+<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
+<%--                    </tr>--%>
+<%--                    <tr class="d-flex">--%>
+<%--                        <td class="col-2">obiad</td>--%>
+<%--                        <td class="col-8">zupa pomidorowa</td>--%>
+<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
+<%--                    </tr>--%>
                     </tbody>
                 </table>
-                <table class="table">
-                    <thead>
-                    <tr class="d-flex">
-                        <th class="col-2">Wtorek</th>
-                        <th class="col-8"></th>
-                        <th class="col-2"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="d-flex">
-                        <td class="col-2">śniadanie</td>
-                        <td class="col-8">płatki owsiane z jagodami i komosą ryżową</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">drugie śniadanie</td>
-                        <td class="col-8">pączki</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">obiad</td>
-                        <td class="col-8">schabowy w panierce</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    </tbody>
-                </table>
+<%--                <table class="table">--%>
+<%--                    <thead>--%>
+<%--                    <tr class="d-flex">--%>
+<%--                        <th class="col-2">Wtorek</th>--%>
+<%--                        <th class="col-8"></th>--%>
+<%--                        <th class="col-2"></th>--%>
+<%--                    </tr>--%>
+<%--                    </thead>--%>
+<%--                    <tbody>--%>
+<%--                    <tr class="d-flex">--%>
+<%--                        <td class="col-2">śniadanie</td>--%>
+<%--                        <td class="col-8">płatki owsiane z jagodami i komosą ryżową</td>--%>
+<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
+<%--                    </tr>--%>
+<%--                    <tr class="d-flex">--%>
+<%--                        <td class="col-2">drugie śniadanie</td>--%>
+<%--                        <td class="col-8">pączki</td>--%>
+<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
+<%--                    </tr>--%>
+<%--                    <tr class="d-flex">--%>
+<%--                        <td class="col-2">obiad</td>--%>
+<%--                        <td class="col-8">schabowy w panierce</td>--%>
+<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
+<%--                    </tr>--%>
+<%--                    </tbody>--%>
+<%--                </table>--%>
+                </c:forEach>
             </div>
         </div>
     </div>

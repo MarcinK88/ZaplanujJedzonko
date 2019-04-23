@@ -2,6 +2,7 @@ package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Plan;
+import pl.coderslab.model.Recipe;
 import pl.coderslab.model.RecipePlan;
 import pl.coderslab.utils.DbUtil;
 
@@ -20,6 +21,7 @@ public class PlanDao {
     private static final String UPDATE_PLAN_QUERY = "UPDATE plan SET name = ? , description = ?, created = ?, admin_id = ? where id = ?;";
     private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?;";
     private static final String GET_PLAN_QUANTITY = "SELECT COUNT(*) as counter FROM plan WHERE admin_id = ?;";
+    private static final String GET_ALL_PLANS_BY_ADMIN_ID = "SELECT * FROM plan WHERE admin_id = ? ORDER BY created DESC;";
     private static final String GET_LAST_PLAN_NAME = "select name from plan where id = (SELECT MAX(id) from plan WHERE admin_id = ?);";
     private static final String GET_LAST_PLAN = "SELECT day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description\n" +
             "FROM `recipe_plan`\n" +
@@ -88,6 +90,33 @@ public class PlanDao {
             e.printStackTrace();
         }
         return planList;
+    }
+
+    public List<Plan> findAllByAdminId(Integer adminId) {
+
+        List<Plan> planList = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_PLANS_BY_ADMIN_ID);
+        ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Plan planToAdd = new Plan();
+                    planToAdd.setId(resultSet.getInt("id"));
+                    planToAdd.setName(resultSet.getString("name"));
+                    planToAdd.setDescription(resultSet.getString("description"));
+                    planToAdd.setCreated(resultSet.getString("created"));
+                    planToAdd.setAdminId(resultSet.getInt("admin_id"));
+                    planList.add(planToAdd);
+                }
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return planList;
+
     }
 
     public String getLastPlanName (int adminID) {

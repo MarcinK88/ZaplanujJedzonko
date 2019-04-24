@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             AdminDao adminDao = new AdminDao();
             Admins admin = adminDao.readByEmail(req.getParameter("email"));
+            session.setAttribute("loggedUserMail", req.getParameter("email"));
             session.setAttribute("loggedAdmin", admin);
             resp.sendRedirect("/");
 

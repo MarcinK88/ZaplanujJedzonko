@@ -14,7 +14,6 @@ import java.io.IOException;
 public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
         resp.sendRedirect("registration.jsp");
     }
     @Override
@@ -29,7 +28,7 @@ public class Register extends HttpServlet {
         adminDao.create(admins);
 
 
-        resp.sendRedirect("/login");
+        resp.sendRedirect("/login.jsp");
 
     }
 }

@@ -32,7 +32,7 @@ public class RecipeAddServlet extends HttpServlet {
         String updated = new Timestamp(System.currentTimeMillis()).toString();
 
         HttpSession session = req.getSession();
-        String email = (String)session.getAttribute("loginUserMail");
+        String email = (String)session.getAttribute("loggedUserMail");
 
         AdminDao adminDao = new AdminDao();
         Admins admins = adminDao.readByEmail(email);

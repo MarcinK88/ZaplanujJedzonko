@@ -30,6 +30,36 @@ public class PlanDao {
             "recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)\n" +
             "ORDER by day_name.display_order, recipe_plan.display_order;";
 
+    private static final String GET_PLAN_DETAILS_BY_ID = "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description\n" +
+            "FROM `recipe_plan`\n" +
+            "JOIN day_name on day_name.id=day_name_id\n" +
+            "JOIN recipe on recipe.id=recipe_id WHERE plan_id = ? \n" +
+            "ORDER by day_name.display_order, recipe_plan.display_order;";
+
+    public List<RecipePlan> readRecipePlan(int recipeId) {
+        List<RecipePlan> recipePlanList = new ArrayList<>();
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_PLAN_DETAILS_BY_ID);
+        ) {
+            statement.setInt(1, recipeId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+//                System.out.println(resultSet.getString("day_name"));
+                while (resultSet.next()) {
+                    RecipePlan recipePlanToAdd = new RecipePlan();
+                    recipePlanToAdd.setDayName(resultSet.getString("day_name"));
+                    recipePlanToAdd.setMealName(resultSet.getString("meal_name"));
+                    recipePlanToAdd.setRecipeName(resultSet.getString("recipe_name"));
+                    recipePlanToAdd.setRecipeDescription(resultSet.getString("recipe_description"));
+                    recipePlanList.add(recipePlanToAdd);
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recipePlanList;
+    }
 
     public Plan read(Integer planId) {
         Plan plan = new Plan();
@@ -153,7 +183,6 @@ public class PlanDao {
                     recipePlanToAdd.setRecipeName(resultSet.getString("recipe_name"));
                     recipePlanToAdd.setRecipeDescription(resultSet.getString("recipe_description"));
                     recipePlanList.add(recipePlanToAdd);
-                    System.out.println(recipePlanToAdd.toString());
 
                 }
             }

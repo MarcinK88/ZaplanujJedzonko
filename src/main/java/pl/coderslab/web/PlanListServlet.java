@@ -1,9 +1,8 @@
 package pl.coderslab.web;
 
-import pl.coderslab.dao.AdminDao;
-import pl.coderslab.dao.RecipeDao;
+import pl.coderslab.dao.PlanDao;
 import pl.coderslab.model.Admins;
-import pl.coderslab.model.Recipe;
+import pl.coderslab.model.Plan;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,21 +14,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/app/recipe/list/")
-public class RecipeListServlet extends HttpServlet {
+@WebServlet("/app/plan/list")
+public class PlanListServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         HttpSession session = req.getSession();
-        List<Recipe> recipies = new ArrayList<>();
-        RecipeDao recipeDao = new RecipeDao();
 
-
-        recipies.addAll(recipeDao.findAllByAdminId(((Admins) session.getAttribute("loggedAdmin")).getId()));
-
-        req.setAttribute("recipies", recipies);
-
-        req.getServletContext().getRequestDispatcher("/recipeList.jsp").forward(req,resp);
+        List<Plan> planList = new ArrayList<>();
+        PlanDao planDao = new PlanDao();
+        planList = planDao.findAllByAdminId(((Admins) session.getAttribute("loggedAdmin")).getId());
+        req.setAttribute("planList", planList);
+        req.getServletContext().getRequestDispatcher("/planList.jsp").forward(req,resp);
     }
 
     @Override

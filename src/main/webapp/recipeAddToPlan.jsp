@@ -44,7 +44,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app/plan/list/">
+                <a class="nav-link" href="/app/plan/list">
                     <span>Plany</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -73,39 +73,70 @@
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
                 <div class="row border-bottom border-3 p-1 m-1">
                     <div class="col noPadding">
-                        <h3 class="color-header text-uppercase">LISTA PLANÓW</h3>
+                        <h3 class="color-header text-uppercase">DODAJ PRZEPIS DO PLANU</h3>
                     </div>
                     <div class="col d-flex justify-content-end mb-2 noPadding">
-                        <a href="/app/recipe/plan/add" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj plan</a>
+                        <a href="#" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</a>
                     </div>
                 </div>
 
                 <div class="schedules-content">
-                    <table class="table border-bottom">
-                        <thead>
-                        <tr class="d-flex">
-                            <th class="col-1">ID</th>
-                            <th class="col-2">NAZWA</th>
-                            <th class="col-7">OPIS</th>
-                            <th class="col-2 center">AKCJE</th>
-                        </tr>
-                        </thead>
-                        <tbody class="text-color-lighter">
-                        <c:forEach items="${planList}" var="plan" varStatus="loop">
-                        <tr class="d-flex">
-                            <td class="col-1">${loop.count}</td>
-                            <td class="col-2">${plan.name}</td>
-                            <td class="col-7">
-                                ${plan.description}
-                            </td>
-                            <td class="col-2 d-flex align-items-center justify-content-center flex-wrap"><a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                                    <a href="/app/plan/details?planId=${plan.id}" class="btn btn-info rounded-0 text-light m-1"> Szczegóły</a>
-                                <a href="/app-edit-schedules.html" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
-                            </td>
-                        </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                    <form>
+                        <div class="form-group row">
+                            <label for="choosePlan" class="col-sm-2 label-size col-form-label">
+                                Wybierz plan
+                            </label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="choosePlan" name="planId">
+                                    <c:forEach items="${plans}" var="plan">
+                                    <option value="${plan.id}">${plan.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 label-size col-form-label">
+                                Nazwa posiłku
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" value="" id="name" placeholder="Nazwa posiłku">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="number" class="col-sm-2 label-size col-form-label">
+                                Numer posiłku
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" value="" id="number" placeholder="Numer posiłki">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="recipie" class="col-sm-2 label-size col-form-label">
+                                Przepis
+                            </label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="recipie" name="recipeId">
+                                    <c:forEach items="${recipes}" var="recipe">
+                                    <option value="${recipe.id}">${recipe.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="day" class="col-sm-2 label-size col-form-label">
+                                Dzień
+                            </label>
+                            <div class="col-sm-2">
+                                <select class="form-control" id="day">
+                                    <option>poniedziałek</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

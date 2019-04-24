@@ -22,7 +22,6 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RecipeDao recipeDao = new RecipeDao();
 
-        recipeDao.create(new Recipe("testname","ingr1, ingr2, ingr3", "descriptiontest", "2019-04-25 10:00:00", "2019-04-25 10:00:00", 100, "prep", 2));
         PlanDao planDao = new PlanDao();
         HttpSession httpSession = req.getSession();
         int recipeQuantity = recipeDao.recipeQuantity(((Admins) httpSession.getAttribute("loggedAdmin")).getId());

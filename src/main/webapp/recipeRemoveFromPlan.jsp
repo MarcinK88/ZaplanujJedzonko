@@ -77,10 +77,10 @@
                 </div>
                 <div class="alert">Czy na pewno chcesz usunąć przepis z planu?
                 </div>
-                <form action="/app/plan/removerecipe/" method="post">
-                    <input type="hidden" name="action" id="action" value="delete">
+                <form action="/app/plan/removerecipe" method="post">
+                    <input type="hidden" name="recipeId" id="recipeId" value="<%= request.getParameter("id") %>">
                 <button type="submit"> <div class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">OK</div></button>
-                                        <div class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4"><a href="/dashboard">Anuluj</a></div>
+                                       <div class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4"><a href="/dashboard">Anuluj</a></div>
                 </form>
 </body>
 

@@ -1,5 +1,7 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.RecipePlanDao;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/app/plan/removerecipe/")
+@WebServlet("/app/plan/removerecipe")
 public class RecipeRemoveFromPlanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -17,12 +19,14 @@ public class RecipeRemoveFromPlanServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if (action.equals("delete")){
-            resp.getWriter().append("naciśnięto delete");
-        }
-        else {
-            resp.getWriter().append("nie rozpoznano");
-        }
+        int recipeId = Integer.parseInt(req.getParameter("recipeId"));
+
+
+
+        RecipePlanDao recipePlanDao = new RecipePlanDao();
+        recipePlanDao.delete(recipeId);
+
+        resp.sendRedirect("/app/plan/list");
+
     }
 }

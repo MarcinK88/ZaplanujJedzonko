@@ -54,6 +54,7 @@ public class RecipeDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     quantity = resultSet.getInt("counter");
+
                 }
 
             }

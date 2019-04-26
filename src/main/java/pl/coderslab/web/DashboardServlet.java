@@ -3,8 +3,7 @@ package pl.coderslab.web;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
 import pl.coderslab.model.Admins;
-import pl.coderslab.model.Recipe;
-import pl.coderslab.model.RecipePlan;
+import pl.coderslab.model.PlanDetails;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +21,6 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RecipeDao recipeDao = new RecipeDao();
 
-        recipeDao.create(new Recipe("testname","ingr1, ingr2, ingr3", "descriptiontest", "2019-04-25 10:00:00", "2019-04-25 10:00:00", 100, "prep", 2));
         PlanDao planDao = new PlanDao();
         HttpSession httpSession = req.getSession();
         int recipeQuantity = recipeDao.recipeQuantity(((Admins) httpSession.getAttribute("loggedAdmin")).getId());
@@ -30,11 +28,11 @@ public class DashboardServlet extends HttpServlet {
         httpSession.setAttribute("recipeQuantity", recipeQuantity);
         httpSession.setAttribute("planQuantity", planQuantity);
 
-        List<RecipePlan> recipePlanList = new ArrayList<>();
-        recipePlanList.addAll(planDao.findLastPlan(((Admins) (httpSession.getAttribute("loggedAdmin"))).getId()));
-        if (!recipePlanList.isEmpty()) {
+        List<PlanDetails> planDetailsList = new ArrayList<>();
+        planDetailsList.addAll(planDao.findLastPlan(((Admins) (httpSession.getAttribute("loggedAdmin"))).getId()));
+        if (!planDetailsList.isEmpty()) {
 
-            httpSession.setAttribute("recipePlanList", recipePlanList);
+            httpSession.setAttribute("recipePlanList", planDetailsList);
 
         }
         httpSession.setAttribute("recipePlanName",planDao.getLastPlanName(((Admins) (httpSession.getAttribute("loggedAdmin"))).getId()));

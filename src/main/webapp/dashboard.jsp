@@ -107,7 +107,7 @@
                 <h2 class="dashboard-content-title">
                     <span>Ostatnio dodany plan:</span> ${recipePlanName}
                 </h2>
-                <c:forEach items="${recipePlanList}" var="plan" >
+                <c:forEach items="${planDetailsList}" var="plan" >
                 <table class="table">
                     <thead>
                     <tr class="d-flex">

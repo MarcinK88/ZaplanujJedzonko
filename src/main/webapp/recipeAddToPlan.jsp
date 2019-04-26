@@ -75,13 +75,14 @@
                     <div class="col noPadding">
                         <h3 class="color-header text-uppercase">DODAJ PRZEPIS DO PLANU</h3>
                     </div>
+                    <form action="/app/recipe/plan/add/" method="post">
                     <div class="col d-flex justify-content-end mb-2 noPadding">
-                        <a href="#" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</a>
+                        <button type="submit"> <div class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</div></button>
                     </div>
                 </div>
 
                 <div class="schedules-content">
-                    <form>
+
                         <div class="form-group row">
                             <label for="choosePlan" class="col-sm-2 label-size col-form-label">
                                 Wybierz plan
@@ -99,7 +100,7 @@
                                 Nazwa posiłku
                             </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" value="" id="name" placeholder="Nazwa posiłku">
+                                <input type="text" class="form-control" value="" id="name"name="mealName" placeholder="Nazwa posiłku">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -107,7 +108,7 @@
                                 Numer posiłku
                             </label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" value="" id="number" placeholder="Numer posiłki">
+                                <input type="text" class="form-control" value="" id="number" name="displayOrder" placeholder="Numer posiłki">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -127,12 +128,10 @@
                                 Dzień
                             </label>
                             <div class="col-sm-2">
-                                <select class="form-control" id="day">
-                                    <option>poniedziałek</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <select class="form-control" id="day" name="dayNameId">
+                                    <c:forEach items="${dayNames}" var="dayName">
+                                    <option value=${dayName.displayOrder}>${dayName.name}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

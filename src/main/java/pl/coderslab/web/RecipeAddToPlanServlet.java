@@ -1,10 +1,10 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
-import pl.coderslab.model.Admins;
-import pl.coderslab.model.Plan;
-import pl.coderslab.model.Recipe;
+import pl.coderslab.dao.RecipePlanDao;
+import pl.coderslab.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,11 +34,36 @@ public class RecipeAddToPlanServlet extends HttpServlet {
         recipes = recipeDao.findAllByAdminId(((Admins) httpSession.getAttribute("loggedAdmin")).getId());
         httpSession.setAttribute("recipes",recipes);
 
+        //lista dni
+        List<DayName> dayNames = new ArrayList<>();
+        DayNameDao dayNameDao = new DayNameDao();
+        dayNames = dayNameDao.findAll();
+        httpSession.setAttribute("dayNames", dayNames);
+
         req.getServletContext().getRequestDispatcher("/recipeAddToPlan.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        //przekazywane parametry:
+        //req.getParameter("planId")
+        //req.getParameter("mealName")
+        //req.getParameter("displayOrder")
+        //req.getParameter("recipeId")
+        //req.getParameter("dayNameId")
+
+        RecipePlanDao recipePlanDao = new RecipePlanDao();
+
+
+        RecipePlan recipePlanToAdd = new RecipePlan();
+//        = recipePlanDao.create(req.getParameter("planId"), req.getParameter("mealName"), req.getParameter("displayOrder"), req.getParameter("recipeId"),req.getParameter("dayNameId"));
+        recipePlanToAdd.setPlanId(Integer.parseInt(req.getParameter("planId")));
+        recipePlanToAdd.setMealName(req.getParameter("mealName"));
+        recipePlanToAdd.setDisplayOrder(Integer.parseInt(req.getParameter("displayOrder")));
+        recipePlanToAdd.setRecipeId(Integer.parseInt(req.getParameter("recipeId")));
+        recipePlanToAdd.setDayNameId(Integer.parseInt(req.getParameter("dayNameId")));
+        recipePlanDao.create(recipePlanToAdd);
+
+        resp.sendRedirect("/app/recipe/plan/add/");
     }
 }

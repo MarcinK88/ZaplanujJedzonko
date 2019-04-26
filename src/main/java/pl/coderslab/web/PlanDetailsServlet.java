@@ -2,7 +2,7 @@ package pl.coderslab.web;
 
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.model.Plan;
-import pl.coderslab.model.RecipePlan;
+import pl.coderslab.model.PlanDetails;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,7 @@ public class PlanDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
-        List<RecipePlan> planToPrint = new ArrayList<>();
+        List<PlanDetails> planToPrint = new ArrayList<>();
         PlanDao planDao = new PlanDao();
         planToPrint = planDao.readRecipePlan(Integer.parseInt(req.getParameter("planId")));
         httpSession.setAttribute("planToPrint",planToPrint);

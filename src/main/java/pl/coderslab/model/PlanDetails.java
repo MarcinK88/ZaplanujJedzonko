@@ -5,13 +5,15 @@ public class PlanDetails {
     private String recipeName;
     private String recipeDescription;
     private String mealName;
+    private int recipePlanId;
 
-    private int id;
-    private int recipeId;
-    private int displayOrder;
-    private int dayNameId;
-    private int planId;
+    public int getRecipePlanId() {
+        return recipePlanId;
+    }
 
+    public void setRecipePlanId(int recipePlanId) {
+        this.recipePlanId = recipePlanId;
+    }
 
     public PlanDetails() {
 

@@ -29,7 +29,7 @@ public class PlanDao {
             "recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)\n" +
             "ORDER by day_name.display_order, recipe_plan.display_order;";
 
-    private static final String GET_PLAN_DETAILS_BY_ID = "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description\n" +
+    private static final String GET_PLAN_DETAILS_BY_ID = "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description, recipe_plan.id as recipe_plan_id\n" +
             "FROM `recipe_plan`\n" +
             "JOIN day_name on day_name.id=day_name_id\n" +
             "JOIN recipe on recipe.id=recipe_id WHERE plan_id = ? \n" +
@@ -50,6 +50,7 @@ public class PlanDao {
                     planDetailsToAdd.setMealName(resultSet.getString("meal_name"));
                     planDetailsToAdd.setRecipeName(resultSet.getString("recipe_name"));
                     planDetailsToAdd.setRecipeDescription(resultSet.getString("recipe_description"));
+                    planDetailsToAdd.setRecipePlanId(resultSet.getInt("recipe_plan_id"));
                     planDetailsList.add(planDetailsToAdd);
 
                 }

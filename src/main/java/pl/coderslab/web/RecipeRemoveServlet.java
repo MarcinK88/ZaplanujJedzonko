@@ -1,5 +1,7 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.RecipeDao;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,10 @@ public class RecipeRemoveServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        int recipeId = Integer.parseInt(req.getParameter("recipeId"));
+
+        RecipeDao recipeDao = new RecipeDao();
+        recipeDao.delete(recipeId);
+        resp.sendRedirect("/app/recipe/list/");
     }
 }

@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,20 +12,8 @@
     <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
-
 <body>
-<header class="page-header">
-    <nav class="navbar navbar-expand-lg justify-content-between">
-        <a href="/" class="navbar-brand main-logo main-logo-smaller">
-            Zaplanuj <span>Jedzonko</span>
-        </a>
-        <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">${loggedAdmin.firstName}</h4>
-            <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
-        </div>
-    </nav>
-</header>
-
+<jsp:include page="/WEB-INF/JSP/headerDashboard.jsp"></jsp:include>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
         <ul class="nav flex-column long-bg">
@@ -44,7 +30,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app/plan/list/">
+                <a class="nav-link" href="/app/plan/list">
                     <span>Plany</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -69,43 +55,50 @@
             </li>
         </ul>
 
-        <div class="m-4 p-3 width-medium">
+        <div class="m-4 p-3 width-medium text-color-darker">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
-                <div class="row border-bottom border-3 p-1 m-1">
-                    <div class="col noPadding">
-                        <h3 class="color-header text-uppercase">LISTA PLANÓW</h3>
+                <div class="mt-4 ml-4 mr-4">
+                    <div class="row border-bottom border-3">
+                        <div class="col"><h3 class="color-header text-uppercase">Szczegóły przepisu</h3></div>
+                        <div class="col d-flex justify-content-end mb-2"><a href="/app/recipe/list/" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Powrót</a></div>
                     </div>
-                    <div class="col d-flex justify-content-end mb-2 noPadding">
-                        <a href="/app/plan/add" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj plan</a>
-                    </div>
-                </div>
 
-                <div class="schedules-content">
-                    <table class="table border-bottom">
-                        <thead>
+                    <table class="table borderless">
+                        <tbody>
                         <tr class="d-flex">
-                            <th class="col-1">ID</th>
-                            <th class="col-2">NAZWA</th>
-                            <th class="col-7">OPIS</th>
-                            <th class="col-2 center">AKCJE</th>
-                        </tr>
-                        </thead>
-                        <tbody class="text-color-lighter">
-                        <c:forEach items="${planList}" var="plan" varStatus="loop">
-                        <tr class="d-flex">
-                            <td class="col-1">${loop.count}</td>
-                            <td class="col-2">${plan.name}</td>
+                            <th scope="row" class="col-2">Nazwa Przepisu</th>
                             <td class="col-7">
-                                ${plan.description}
-                            </td>
-                            <td class="col-2 d-flex align-items-center justify-content-center flex-wrap"><a href="/app/plan/remove?id=${plan.id}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                                    <a href="/app/plan/details?planId=${plan.id}" class="btn btn-info rounded-0 text-light m-1"> Szczegóły</a>
-                                <a href="/app-edit-schedules.html" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
+                                ${recipeDetails.getName()}
                             </td>
                         </tr>
-                        </c:forEach>
+                        <tr class="d-flex">
+                            <th scope="row" class="col-2">Opis przepisu</th>
+                            <td class="col-7">${recipeDetails.getDescription()}</td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th scope="row" class="col-2">Przygotowanie (minuty)</th>
+                            <td class="col-7">
+                                ${recipeDetails.getPreparationTime()}
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
+
+                    <div class="row d-flex">
+                        <div class="col-5 border-bottom border-3"><h3 class="text-uppercase">Sposób przygotowania</h3></div>
+                        <div class="col-2"></div>
+                        <div class="col-5 border-bottom border-3"><h3 class="text-uppercase">Składniki</h3></div>
+                    </div>
+                    <div class="row d-flex">
+                        <div class="col-5 p-4">
+                            <p>${recipeDetails.getPreparation()}</p>
+                        </div>
+                        <div class="col-2"></div>
+                        <ul class="col-5 p-4 list-unstyled">
+                            <li>${recipeDetails.getIngredients()}</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -119,5 +112,7 @@
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
+<jsp:include page="/WEB-INF/JSP/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -18,7 +18,7 @@
     <div class="row dashboard-nowrap">
         <ul class="nav flex-column long-bg">
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard.jsp">
+                <a class="nav-link" href="/dashboard.html">
                     <span>Pulpit</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -55,65 +55,47 @@
             </li>
         </ul>
 
-        <div class="m-4 p-3 width-medium text-color-darker">
+        <div class="m-4 p-3 width-medium">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
                 <!-- fix action, method -->
                 <!-- add name attribute for all inputs -->
-                <form action="/app/recipe/add" method="post">
-                    <div class="mt-4 ml-4 mr-4">
-                        <div class="row border-bottom border-3">
-                            <div class="col"><h3 class="color-header text-uppercase">Nowy przepis</h3></div>
-                            <div class="col d-flex justify-content-end mb-2">
-                                <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
+                <form action="/app/plan/add" method="post">
+                    <div class="row border-bottom border-3 p-1 m-1">
+                        <div class="col noPadding">
+                            <h3 class="color-header text-uppercase">NOWY PLAN</h3>
+                        </div>
+                        <div class="col d-flex justify-content-end mb-2 noPadding">
+                            <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
+                        </div>
+                    </div>
+
+                    <div class="schedules-content">
+
+                        <div class="form-group row">
+                            <label for="planName" class="col-sm-2 label-size col-form-label">
+                                Nazwa planu
+                            </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="planName" placeholder="Nazwa planu" name="planName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="planDescription" class="col-sm-2 label-size col-form-label">
+                                Opis planu
+                            </label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="5" id="planDescription"
+                                          placeholder="Opis planu" name="planDescription"></textarea>
                             </div>
                         </div>
 
-                        <table class="table borderless">
-                            <tbody>
-                            <tr class="d-flex">
-                                <th scope="row" class="col-2">Nazwa Przepisu</th>
-                                <td class="col-7">
-                                    <input name="recipeName" class="w-100 p-1" value="" placeholder="Wprowadź nazwę">
-                                </td>
-                            </tr>
-                            <tr class="d-flex">
-                                <th scope="row" class="col-2">Opis przepisu</th>
-                                <td class="col-7"><textarea class="w-100 p-1" rows="5" name="description"></textarea></td>
-                            </tr>
-                            <tr class="d-flex">
-                                <th scope="row" class="col-2">Czas przygotowania (minuty)</th>
-                                <td class="col-3">
-                                    <input class="p-1" type="number" value="" name="preparationTime">
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="row d-flex">
-                            <div class="col-5 border-bottom border-3">
-                                <h3 class="text-uppercase">Sposób przygotowania</h3>
-                            </div>
-                            <div class="col-2"></div>
-                            <div class="col-5 border-bottom border-3">
-                                <h3 class="text-uppercase">Składniki</h3>
-                            </div>
-                        </div>
-                        <div class="row d-flex">
-                            <div class="col-5 p-4">
-                                <textarea name="preparation" class="w-100 p-1" rows="10"></textarea>
-                            </div>
-                            <div class="col-2"></div>
-
-                            <div class="col-5 p-4">
-                                <textarea name="ingredients" class="w-100 p-1" rows="10" ></textarea>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -2,8 +2,7 @@ package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Plan;
-import pl.coderslab.model.Recipe;
-import pl.coderslab.model.RecipePlan;
+import pl.coderslab.model.PlanDetails;
 import pl.coderslab.utils.DbUtil;
 
 import java.sql.Connection;
@@ -30,6 +29,37 @@ public class PlanDao {
             "recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)\n" +
             "ORDER by day_name.display_order, recipe_plan.display_order;";
 
+    private static final String GET_PLAN_DETAILS_BY_ID = "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description, recipe_plan.id as recipe_plan_id\n" +
+            "FROM `recipe_plan`\n" +
+            "JOIN day_name on day_name.id=day_name_id\n" +
+            "JOIN recipe on recipe.id=recipe_id WHERE plan_id = ? \n" +
+            "ORDER by day_name.display_order, recipe_plan.display_order;";
+
+    public List<PlanDetails> readRecipePlan(int recipeId) {
+        List<PlanDetails> planDetailsList = new ArrayList<>();
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_PLAN_DETAILS_BY_ID);
+        ) {
+            statement.setInt(1, recipeId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+//                System.out.println(resultSet.getString("day_name"));
+                while (resultSet.next()) {
+                    PlanDetails planDetailsToAdd = new PlanDetails();
+                    planDetailsToAdd.setDayName(resultSet.getString("day_name"));
+                    planDetailsToAdd.setMealName(resultSet.getString("meal_name"));
+                    planDetailsToAdd.setRecipeName(resultSet.getString("recipe_name"));
+                    planDetailsToAdd.setRecipeDescription(resultSet.getString("recipe_description"));
+                    planDetailsToAdd.setRecipePlanId(resultSet.getInt("recipe_plan_id"));
+                    planDetailsList.add(planDetailsToAdd);
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return planDetailsList;
+    }
 
     public Plan read(Integer planId) {
         Plan plan = new Plan();
@@ -137,8 +167,8 @@ public class PlanDao {
         return lastPlanName;
     }
 
-    public List<RecipePlan> findLastPlan(int adminID) {
-        List<RecipePlan> recipePlanList = new ArrayList<>();
+    public List<PlanDetails> findLastPlan(int adminID) {
+        List<PlanDetails> planDetailsList = new ArrayList<>();
 
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_LAST_PLAN);
@@ -147,20 +177,19 @@ public class PlanDao {
             try (ResultSet resultSet = statement.executeQuery()) {
 //                System.out.println(resultSet.getString("day_name"));
                 while (resultSet.next()) {
-                    RecipePlan recipePlanToAdd = new RecipePlan();
-                    recipePlanToAdd.setDayName(resultSet.getString("day_name"));
-                    recipePlanToAdd.setMealName(resultSet.getString("meal_name"));
-                    recipePlanToAdd.setRecipeName(resultSet.getString("recipe_name"));
-                    recipePlanToAdd.setRecipeDescription(resultSet.getString("recipe_description"));
-                    recipePlanList.add(recipePlanToAdd);
-                    System.out.println(recipePlanToAdd.toString());
+                    PlanDetails planDetailsToAdd = new PlanDetails();
+                    planDetailsToAdd.setDayName(resultSet.getString("day_name"));
+                    planDetailsToAdd.setMealName(resultSet.getString("meal_name"));
+                    planDetailsToAdd.setRecipeName(resultSet.getString("recipe_name"));
+                    planDetailsToAdd.setRecipeDescription(resultSet.getString("recipe_description"));
+                    planDetailsList.add(planDetailsToAdd);
 
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return recipePlanList;
+        return planDetailsList;
     }
 
     public Plan create(Plan plan) {

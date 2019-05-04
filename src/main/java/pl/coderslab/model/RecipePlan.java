@@ -1,28 +1,40 @@
 package pl.coderslab.model;
 
 public class RecipePlan {
-    private String dayName;
+
+    private int id;
+    private int recipeId;
     private String mealName;
-    private String recipeName;
-    private String recipeDescription;
+    private int displayOrder;
+    private int dayNameId;
+    private int planId;
 
     public RecipePlan() {
-
     }
 
-    public RecipePlan(String dayName, String mealName, String recipeName, String recipeDescription) {
-        this.dayName = dayName;
+    public RecipePlan(int id, int recipeId, String mealName, int displayOrder, int dayNameId, int planId) {
+        this.id = id;
+        this.recipeId = recipeId;
         this.mealName = mealName;
-        this.recipeName = recipeName;
-        this.recipeDescription = recipeDescription;
+        this.displayOrder = displayOrder;
+        this.dayNameId = dayNameId;
+        this.planId = planId;
     }
 
-    public String getDayName() {
-        return dayName;
+    public int getId() {
+        return id;
     }
 
-    public void setDayName(String dayName) {
-        this.dayName = dayName;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
     }
 
     public String getMealName() {
@@ -33,29 +45,29 @@ public class RecipePlan {
         this.mealName = mealName;
     }
 
-    public String getRecipeName() {
-        return recipeName;
+    public int getDisplayOrder() {
+        return displayOrder;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setDisplayOrder(int displayOrder) {
+        this.displayOrder = displayOrder;
     }
 
-    public String getRecipeDescription() {
-        return recipeDescription;
+    public int getDayNameId() {
+        return dayNameId;
     }
 
-    public void setRecipeDescription(String recipeDescription) {
-        this.recipeDescription = recipeDescription;
+    public void setDayNameId(int dayNameId) {
+        this.dayNameId = dayNameId;
     }
 
-    @Override
-    public String toString() {
-        return "RecipePlan{" +
-                "dayName='" + dayName + '\'' +
-                ", mealName='" + mealName + '\'' +
-                ", recipeName='" + recipeName + '\'' +
-                ", recipeDescription='" + recipeDescription + '\'' +
-                '}';
+    public int getPlanId() {
+        return planId;
     }
+
+    public void setPlanId(int planId) {
+        this.planId = planId;
+    }
+
+
 }

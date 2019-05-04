@@ -74,7 +74,7 @@
             <div class="dashboard-header m-4">
                 <div class="dashboard-menu">
                     <div class="menu-item border-dashed">
-                        <a href="">
+                        <a href="/app/recipe/add">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj przepis</span>
                         </a>
@@ -86,7 +86,7 @@
                         </a>
                     </div>
                     <div class="menu-item border-dashed">
-                        <a href="">
+                        <a href="/app/recipe/plan/add/">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj przepis do planu</span>
                         </a>
@@ -108,7 +108,7 @@
                 <h2 class="dashboard-content-title">
                     <span>Ostatnio dodany plan:</span> ${recipePlanName}
                 </h2>
-                <c:forEach items="${recipePlanList}" var="plan" >
+                <c:forEach items="${planDetailsList}" var="plan" >
                 <table class="table">
                     <thead>
                     <tr class="d-flex">

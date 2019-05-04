@@ -44,7 +44,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app/plan/list/">
+                <a class="nav-link" href="/app/plan/list">
                     <span>Plany</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -68,56 +68,20 @@
                 </a>
             </li>
         </ul>
-
         <div class="m-4 p-3 width-medium">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
                 <div class="row border-bottom border-3 p-1 m-1">
                     <div class="col noPadding">
-                        <h3 class="color-header text-uppercase">LISTA PLANÓW</h3>
-                    </div>
-                    <div class="col d-flex justify-content-end mb-2 noPadding">
-                        <a href="/app/plan/add" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj plan</a>
+                        <h3 class="color-header text-uppercase">USUWANIE PRZEPISU</h3>
                     </div>
                 </div>
-
-                <div class="schedules-content">
-                    <table class="table border-bottom">
-                        <thead>
-                        <tr class="d-flex">
-                            <th class="col-1">ID</th>
-                            <th class="col-2">NAZWA</th>
-                            <th class="col-7">OPIS</th>
-                            <th class="col-2 center">AKCJE</th>
-                        </tr>
-                        </thead>
-                        <tbody class="text-color-lighter">
-                        <c:forEach items="${planList}" var="plan" varStatus="loop">
-                        <tr class="d-flex">
-                            <td class="col-1">${loop.count}</td>
-                            <td class="col-2">${plan.name}</td>
-                            <td class="col-7">
-                                ${plan.description}
-                            </td>
-                            <td class="col-2 d-flex align-items-center justify-content-center flex-wrap"><a href="/app/plan/remove?id=${plan.id}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                                    <a href="/app/plan/details?planId=${plan.id}" class="btn btn-info rounded-0 text-light m-1"> Szczegóły</a>
-                                <a href="/app-edit-schedules.html" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
-                            </td>
-                        </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                <div class="alert">Czy na pewno chcesz usunąć przepis?
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+                <form action="/app/recipe/remove" method="post">
+                    <input type="hidden" name="recipeId" id="recipeId" value="<%= request.getParameter("id") %>">
+                    <button type="submit"> <div class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">OK</div></button>
+                    <div class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4"><a href="/dashboard">Anuluj</a></div>
+                </form>
 </body>
+
 </html>

@@ -1,43 +1,30 @@
-<img alt="Logo" src="http://coderslab.pl/svg/logo-coderslab.svg" width="400">
 
-### Przygotowanie – pliki css/js.
+# ZaplanujJedzonko
+## Projekt ScrumLab
 
-Pliki **css** możemy umieścić w katalogu 
-````src/main/webapp/css````
-przy powyższej lokalizacji w plikach szablonów załączamy je w następujący sposób:
-````
-  <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
-```` 
-Jako przykład został dołączony servlet `HomeServlet` wskazujący home.jsp, dla którego wyświetla się poprawny szablon strony głównej.
 
-### Dane do połączenia z bazą:
+### Opis programu
+Aplikacja do planowania posiłków z możliwością tworzenia przepisów i menu dla różnych użytkowników. 
 
-Plik znajduje się w naszym projekcie w katalogu **src/main/webapp/META-INF**.
+Projekt zrealizowany w zespole Scrum w ramach kursu programowania. Do zarządzania projektem została użyta tablica w aplikacji Trello.
+![Screenshot](readme-img/trello2.png)
 
-`Zmodyfikuj znajdujące się w nim dane dotyczące połączenia.`
+Strona główna programu:
+![Screenshot](readme-img/1.png)
 
-### W przypadku wystąpienia błędu:
-````
-javax.naming.NameNotFoundException: Name [jdbc/scrumlab] is not bound in this Context. Unable to find [jdbc].
-````
-wykonujemy następujące kroki:
+Możliwość rejestracji nowych użytkowników
+![Screenshot](readme-img/2.png)
 
-Wybierz z górnego menu File –> Project Structure...
+Dodawanie nowych planów, przepisów oraz posiłków
+![Screenshot](readme-img/3.png)
 
-W okienku, które się pojawi, kliknij z lewej strony w Facets następnie **Web**.
+![Screenshot](readme-img/4.png)
 
-Pojawi się okno, w którym kliknij **Add Application Server specific descriptor...**.
+![Screenshot](readme-img/6.png)
 
-![Screenshot](readme-img/context_03.png)
+![Screenshot](readme-img/8.png)
 
-Wybierz z listy serwer **Tomcat** i zaakceptuj przyciskiem **OK**.
 
-![Screenshot](readme-img/context_04.png)
 
-Na liście pojawi się plik **Tomcat Context Descriptor**. Potwierdź przyciskiem **OK**.
-
-![Screenshot](readme-img/context_05.png)
-
-Plik znajduje się w naszym projekcie w katalogu **src/main/webapp/META-INF**.
-
-`Zmodyfikuj znajdujące się w nim dane dotyczące połączenia.`
+### Zastosowane technologie: 
+Servlet, JDBC, JSP

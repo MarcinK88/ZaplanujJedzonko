@@ -9,7 +9,8 @@ Aplikacja do planowania posiłków z możliwością tworzenia przepisów i menu 
 Projekt zrealizowany w zespole Scrum w ramach kursu programowania. Do zarządzania projektem została użyta tablica w aplikacji Trello.
 ![Screenshot](readme-img/trello2.png)
 
-Strona główna programu:
+Strona główna programu
+
 ![Screenshot](readme-img/1.png)
 
 Możliwość rejestracji nowych użytkowników
